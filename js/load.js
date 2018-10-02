@@ -1,13 +1,10 @@
 class LoadData {
     constructor() {
-
+        this.task = {};
     }
 
     load() {
-        this.task = JSON.parse(localStorage.getItem('task'));
-        this.todo = task.todo;
-        this.doing = task.doing;
-        this.done = task.done;
+        this.task = JSON.parse(localStorage.getItem('task')) || {};
     }
 
     save() {

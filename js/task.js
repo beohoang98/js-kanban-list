@@ -1,11 +1,36 @@
 class Task {
     constructor() {
-        this.task = new LoadData();
-        this.task.load();
+        this.taskLoader = new LoadData();
+        this.taskLoader.load();
+        this.mdConverter = new showdown.Converter();
+
+        this.task = this.taskLoader.task;
+
+        this.funcRemoveTask = () => {};
+        this.funcUpdateTask = () => {};
     }
 
-    newTask(info, type = 'todo') {
-        const id = this.make_id();
+    getCount() {
+        let todoCount = 0;
+        let doingCount = 0;
+        let doneCount = 0;
+        let total = 0;
+
+        for (const task of Object.values(this.task)) {
+            ++total;
+            switch (task.type) {
+                case 'todo': ++todoCount; break;
+                case 'doing': ++doingCount; break;
+                case 'done': ++doneCount; break;
+                default: --total;
+            }
+        }
+
+        return {todoCount, doingCount, doneCount, total};
+    }
+
+    static newTask(info, type = 'todo') {
+        const id = this.makeId();
         return {
             id,
             title: info.title || 'No name',
@@ -17,46 +42,72 @@ class Task {
 
     addTask(taskInfo) {
         this.task[taskInfo.id] = taskInfo;
+        this.taskLoader.save();
     }
 
     updateTask(id, info) {
-        for (const key in info) {
+        for (const key of Object.keys(info)) {
             this.task[id][key] = info[key];
         }
+        this.taskLoader.save();
     }
 
-    removeTask
+    removeTask(id) {
+        delete this.task[id];
+        this.taskLoader.save();
+    }
 
-    createElement(taskInfo) {
+    createElement(info) {
         const title = info.title || 'Title';
-        const des = info.des || 'Description';
+        const content = info.content || '';
         const time = info.time || (new Date());
 
         const element = document.createElement('div');
         element.id = info.id;
-        element.className = 'todo-task shadow';
+        element.className = 'todo-task shadow rounded';
         element.draggable = true;
         element.innerHTML = `
         <div class='todo-task-title'>${title}</div>
-        <div class='todo-task-des'>${des}</div>
-        <div class='todo-task-time'>${time.toLocaleString('vi-vn')}</div>
-        <button title='Edit this' class='todo-task-edit'>
-            <i class='fas fa-check-circle'></i>
-        </button>
-        <button title="Delete this" class='todo-task-delete'>
+        <div class='todo-task-time text-secondary'>
+            <i class='fas fa-clock'></i>
+            ${time.toLocaleString('vn')}
+        </div>
+        <details class='todo-task-content'>
+            <summary>show content</summary>
+            ${this.mdConverter.makeHtml(content)}
+        </details>
+        <a title='Edit this' class='todo-task-edit text-primary'>
+            <i class='fas fa-pen-square'></i>
+        </a>
+        <a title="Delete this" class='todo-task-delete text-danger'>
             <i class='fas fa-minus-circle'></i>
-        </button>
+        </a>
         `;
+
+        element.querySelector('.todo-task-edit').addEventListener('click', () => {
+            this.funcUpdateTask(info);
+        });
+
+        element.querySelector('.todo-task-delete').addEventListener('click', () => {
+            this.funcRemoveTask(info);
+        });
+
         element.addEventListener('dragstart', (e) => {
             e.dataTransfer.setData('id', info.id);
         });
 
-        
-
         return element;
     }
 
-    make_id() {
+    onUpdateTask(func) {
+        this.funcUpdateTask = func;
+    }
+
+    onRemoveTask(func) {
+        this.funcRemoveTask = func;
+    }
+
+    static makeId() {
         const timeStr = (new Date()).getTime().toString();
         const randomStr = (Math.floor(Math.random() * 100)).toString();
         return timeStr + randomStr;

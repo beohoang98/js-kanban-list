@@ -1,0 +1,10 @@
+{
+    "extends": "airbnb-base",
+    "rules": {
+        "indent":"off",
+        "no-unused-vars":"warn",
+        "wrap-iife":"warn",
+        "no-undef":"warn",
+        "no-restricted-syntax":"off"
+    }
+}
