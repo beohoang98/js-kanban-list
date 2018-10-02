@@ -1,0 +1,136 @@
+* {
+  box-sizing: border-box; }
+
+:root {
+  --red: #f33;
+  --green: #3f3;
+  --blue: #33f; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: sans-serif; }
+
+.container {
+  max-width: 100%;
+  width: 800px;
+  padding: 1em;
+  margin: 0 auto; }
+
+.todo-container {
+  display: flex;
+  width: 100%; }
+.todo-column {
+  width: 300px;
+  border-radius: 1em;
+  background: #ccc;
+  padding: 1em;
+  margin: 0.25em;
+  overflow: hidden; }
+  .todo-column-body {
+    display: flex;
+    flex-direction: column-reverse;
+    position: relative; }
+  .todo-column-title {
+    background: #333;
+    color: #ccc;
+    margin: -1em;
+    margin-bottom: 1em;
+    padding: 1em;
+    text-align: center; }
+.todo-task {
+  border-radius: 0.5em;
+  padding: 1em;
+  margin-top: 1em;
+  background: #fff;
+  position: relative; }
+  .todo-task-title {
+    font-size: 1.25em;
+    font-weight: bold; }
+  .todo-task-des {
+    font-size: 0.75em; }
+  .todo-task-time {
+    color: #ccc; }
+  .todo-task-done, .todo-task-delete {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 1.25em;
+    color: var(--red); }
+  .todo-task-done {
+    top: 0;
+    bottom: unset;
+    color: #888; }
+  .todo-task.done .todo-task-done {
+    color: var(--green); }
+
+.add-column {
+  border-radius: 0.5em;
+  text-align: center;
+  border: 2px dotted #333;
+  padding: 0.5em;
+  margin: 1em 0; }
+  .add-column:hover {
+    background: #333;
+    color: #ccc; }
+
+.form-hidden {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s; }
+  .form-hidden form {
+    border-radius: 1em;
+    padding: 1em;
+    background: #fff; }
+    .form-hidden form label, .form-hidden form input {
+      display: block; }
+    .form-hidden form input {
+      border-radius: 0.5em; }
+  .form-hidden.active {
+    opacity: 1;
+    visibility: visible; }
+
+.progress-bar {
+  height: 1em;
+  background: #888;
+  border-radius: 0.5em;
+  overflow: hidden; }
+  .progress-bar:after {
+    content: "";
+    clear: both; }
+  .progress-bar div {
+    height: 1em;
+    float: left; }
+
+.progress-todo {
+  background: var(--blue); }
+.progress-doing {
+  background: var(--red); }
+.progress-done {
+  background: var(--green); }
+
+.blue {
+  background: var(--blue);
+  color: #fff; }
+
+.red {
+  background: var(--red);
+  color: #333; }
+
+.green {
+  background: var(--green);
+  color: #fff; }
+
+.shadow {
+  box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.7); }
+
+/*# sourceMappingURL=style.css.map */

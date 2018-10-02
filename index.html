@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TO DO LIST</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/solid.css" integrity="sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/load.js"></script>
+    <script src="/js/task.js"></script>
+    <script src="/js/main.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>TO DO KANBAN LIST</h1>
+
+        <div class="progress-bar" id="progress">
+            <div class='progress-todo'></div>
+            <div class='progress-doing'></div>
+            <div class='progress-done'></div>
+        </div>
+
+        <div class="todo-container">
+            <div title="TO DO" class="todo-column shadow" id="to-do">
+                <div class="todo-column-title blue">TO DO</div>
+                <div class="add-column">+</div>
+                <div class="todo-column-body"></div>
+            </div>
+            <div title="IN PROGRESS" class="todo-column shadow" id="doing">
+                <div class="todo-column-title red">DOING</div>
+                <div class="add-column">+</div>
+                <div class="todo-column-body"></div>
+            </div>
+            <div title="DONE" class="todo-column shadow" id="done">
+                <div class="todo-column-title green">DONE</div>
+                <div class="add-column">+</div>
+                <div class="todo-column-body"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-hidden" id="add-task-modal">
+        <form action="/" id="add-task">
+            <div>
+                <label for="">Title</label>
+                <input required type="text" name='title'>
+            </div>
+            <div>
+                <label for="">Description</label>
+                <input type="text" name="des">
+            </div>
+            <div>
+                <label for="">Due Time</label>
+                <input type="datetime-local" name="time">
+            </div>
+            <button type="submit">Add task</button>
+        </form>
+    </div>
+</body>
+</html>

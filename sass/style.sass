@@ -1,0 +1,149 @@
+*
+    box-sizing: border-box
+
+\:root
+    --red: #f33
+    --green: #3f3
+    --blue: #33f
+
+body
+    margin: 0
+    min-height: 100vh
+    font-family: sans-serif
+
+.container
+    max-width: 100%
+    width: 800px
+    padding: 1em
+    margin: 0 auto
+
+.todo
+    &-container
+        display: flex
+        width: 100%
+
+    &-column
+        width: 300px
+        border-radius: 1em
+        background: #ccc
+        padding: 1em
+        margin: 0.25em
+        overflow: hidden
+        
+        &-body
+            display: flex
+            flex-direction: column-reverse
+            position: relative
+
+        &-title
+            background: #333
+            color: #ccc
+            margin: -1em
+            margin-bottom: 1em
+            padding: 1em
+            text-align: center
+
+    &-task
+        border-radius: 0.5em
+        padding: 1em
+        margin-top: 1em
+        background: #fff
+        position: relative
+
+        &-title
+            font-size: 1.25em
+            font-weight: bold
+        
+        &-des
+            font-size: 0.75em
+        
+        &-time
+            color: #ccc
+
+        &-done, &-delete
+            position: absolute
+            bottom: 0
+            right: 0
+            font-size: 1.25em
+            color: var(--red)
+
+        &-done
+            top: 0
+            bottom: unset
+            color: #888
+
+        &.done &-done
+            color: var(--green)
+
+
+.add-column
+    border-radius: 0.5em
+    text-align: center
+    border: 2px dotted #333
+    padding: 0.5em
+    margin: 1em 0
+
+    &:hover
+        background: #333
+        color: #ccc
+
+.form-hidden
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: rgba(#000, 0.5)
+    display: flex
+    justify-content: center
+    align-items: center
+    visibility: hidden
+    opacity: 0
+    transition: 0.3s
+
+    form
+        border-radius: 1em
+        padding: 1em
+        background: #fff
+        label, input
+            display: block
+
+        input
+            border-radius: 0.5em
+
+    &.active
+        opacity: 1
+        visibility: visible
+
+.progress-bar
+    height: 1em
+    background: #888
+    border-radius: 0.5em
+    overflow: hidden
+
+    &:after
+        content: ''
+        clear: both
+    div
+        height: 1em
+        float: left
+.progress
+    &-todo
+        background: var(--blue)
+    &-doing
+        background: var(--red)
+    &-done
+        background: var(--green)
+
+.blue
+    background: var(--blue)
+    color: #fff
+.red
+    background: var(--red)
+    color: #333
+.green
+    background: var(--green)
+    color: #fff
+
+.shadow
+    box-shadow: 0px 10px 30px -8px rgba(#000, 0.7)
